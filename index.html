@@ -79,7 +79,7 @@ html[data-theme="dark"] #c{filter:invert(1) hue-rotate(180deg)}
 #csd{width:100%}
 #tut{position:fixed;inset:0;z-index:80;display:none;touch-action:none;user-select:none;-webkit-user-select:none}
 #tut.on{display:block}#tut.fade{pointer-events:none}#tut.fade #tuts{display:none}
-#tutc{position:absolute;inset:0;width:100%;height:100%}
+#tutc{position:absolute;inset:0;width:100%;height:100%;background:transparent!important}
 #tutb{position:absolute;display:none;background:#fff;color:#000;border:3px solid #000;border-radius:18px;padding:9px 15px;font:900 22px/1 system-ui,-apple-system,sans-serif;box-shadow:3px 3px 0 #000;white-space:nowrap;transform-origin:100% 50%;animation:tbp .28s cubic-bezier(.3,1.6,.5,1)}
 #tutb:after{content:'';position:absolute;right:-10px;top:calc(50% - 7px);width:13px;height:13px;background:#fff;border-right:3px solid #000;border-top:3px solid #000;transform:rotate(45deg)}
 @keyframes tbp{from{transform:scale(.2)}to{transform:scale(1)}}
@@ -93,7 +93,7 @@ body.tut #c{filter:none!important}
 <div id="cfb">✓</div>
 <div id="mnu"><div id="mnb"><h3>Menu</h3><button id="mnR">New game</button><button id="mnT">Tutorial</button><button id="mnD">Dark mode: off</button><button id="mnC">Colors</button><button id="mnF">Move confirm: off</button><button id="mnX">Close</button></div></div>
 <div id="cs"><div id="cst"></div><div id="csp"><div class="row"><button id="csO" class="on">O</button><button id="csX">X</button></div><div class="row"><button id="csP" class="on">Primary</button><button id="csS">Secondary</button></div><label>Hue</label><input type="range" id="csH" min="0" max="360"><label>Saturation</label><input type="range" id="csA" min="0" max="100"><label>Brightness</label><input type="range" id="csL" min="10" max="100"><button id="csd">Done</button></div></div>
-<div id="ver">ver.0.33</div>
+<div id="ver">ver.0.34</div>
 <header><div id="st"></div><div id="sw"></div><button id="rs" aria-label="Restart">↻</button><button id="mu" aria-label="Music" aria-pressed="true">♪</button></header>
 <canvas id="c"></canvas>
 <canvas id="pan" width="440" height="340"></canvas>
@@ -1409,7 +1409,7 @@ function drawQR(c,u){const q=new QRC(-1,1);q.addData(u);q.make();const n=q.getMo
 function showQR(){drawQR(document.getElementById('qrc'),location.href.split('#')[0].split('?')[0]);document.getElementById('qro').classList.add('on')}
 document.getElementById('qro').addEventListener('click',()=>document.getElementById('qro').classList.remove('on'));
 /* ---------- online play (2 phones, PeerJS) ---------- */
-const BUILD='0.33',net={on:false,me:0,conn:null,peer:null,q:[],start:false,inn:false};
+const BUILD='0.34',net={on:false,me:0,conn:null,peer:null,q:[],start:false,inn:false};
 const $n=i=>document.getElementById(i),nSt=t=>{$n('nts').textContent=t||''};
 const snap=()=>g.join('')+'|'+mvd+'|'+turn+'|'+pieces.length+'|'+lockT;
 const _pl=place,_df=doFlick,_dr=doRot,_rs=reset,_tc=toggleCpu,_pp=pickPiece;
@@ -2147,15 +2147,15 @@ let tutOn=false,tutGen=0,tT=0,tLast=0,tTs=1,FDt=.016,tDraw=null,tTap=null,tTrack
 const tTw=[],tSuns=[],tCh=[],V3=(x,y,z)=>new THREE.Vector3(x,y,z);
 const scene3=new THREE.Scene(),cam3=new THREE.PerspectiveCamera(35,1,.05,300),tDyn=new THREE.Group(),tPl=new THREE.Group();scene3.add(cam3);scene3.add(tDyn);scene3.add(tPl);
 scene3.add(new THREE.AmbientLight(0xffffff,.6));{const d=new THREE.DirectionalLight(0xffffff,.6);d.position.set(-3,10,6);scene3.add(d)}
-const tC=1.25,tCam={p:V3(0,0,16),t:V3(0,0,0)},tE={o:k=>1-(1-k)**3,io:k=>k<.5?4*k**3:1-(-2*k+2)**3/2,b:k=>1+2.70158*(k-1)**3+1.70158*(k-1)**2};
+const tC=1.25,tCam={p:V3(0,0,16),t:V3(0,0,0),f:35},tE={o:k=>1-(1-k)**3,io:k=>k<.5?4*k**3:1-(-2*k+2)**3/2,b:k=>1+2.70158*(k-1)**3+1.70158*(k-1)**2};
 {const S=3*tC,b3=new THREE.BoxGeometry(S,6,S),m=new THREE.Mesh(b3,new THREE.MeshToonMaterial({color:0xffffff,gradientMap:GM})),e=new THREE.LineSegments(new THREE.EdgesGeometry(b3),new THREE.LineBasicMaterial({color:0}));m.position.y=-3;e.position.y=-3;tPl.add(m);tPl.add(e);tPl.visible=false}
 const tWait=ms=>new Promise(r=>tTw.push({t0:tT,d:Math.max(1,ms),f:null,r,g:tutGen}));
 const tTween=(ms,f)=>new Promise(r=>tTw.push({t0:tT,d:Math.max(1,ms),f,r,g:tutGen}));
 const tBuzz=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
-function tShot(p,t,ms,e){if(!ms){tCam.p.copy(p);tCam.t.copy(t);return Promise.resolve()}const p0=tCam.p.clone(),t0=tCam.t.clone();return tTween(ms,k=>{const q=(e||tE.io)(k);tCam.p.copy(p0).lerp(p,q);tCam.t.copy(t0).lerp(t,q)})}
-const tFit=(hw,hh)=>{const t=Math.tan(cam3.fov*PI/360);return Math.max(hw/(t*cam3.aspect),hh/t)};
+function tShot(p,t,ms,e,f){const f0=tCam.f,f1=f||f0;if(!ms){tCam.p.copy(p);tCam.t.copy(t);tCam.f=f1;return Promise.resolve()}const p0=tCam.p.clone(),t0=tCam.t.clone();return tTween(ms,k=>{const q=(e||tE.io)(k);tCam.p.copy(p0).lerp(p,q);tCam.t.copy(t0).lerp(t,q);tCam.f=f0+(f1-f0)*q})}
+const tFit=(hw,hh,f)=>{const t=Math.tan((f||35)*PI/360);return Math.max(hw/(t*cam3.aspect),hh/t)};
 const tBoard=()=>{const d=tFit(2.5,2.3);return[V3(0,d*.62,d*.78+.2),V3(0,0,.2)]};
-function tCamApply(){cam3.aspect=(W||innerWidth)/(H||innerHeight);cam3.updateProjectionMatrix();cam3.position.copy(tCam.p);cam3.lookAt(tCam.t);cam3.updateMatrixWorld()}
+function tCamApply(){cam3.aspect=(W||innerWidth)/(H||innerHeight);cam3.fov=tCam.f;cam3.updateProjectionMatrix();cam3.position.copy(tCam.p);cam3.lookAt(tCam.t);cam3.updateMatrixWorld()}
 function tSize(){const d=Math.min(2,devicePixelRatio||1),w=Math.round(innerWidth*d),h=Math.round(innerHeight*d);if(tc.width!==w||tc.height!==h){tc.width=w;tc.height=h}}
 const tFill=(c,a)=>{tx.globalAlpha=Math.max(0,Math.min(1,a));tx.fillStyle=c;tx.fillRect(0,0,tc.width,tc.height);tx.globalAlpha=1};
 /* the sun, built like the one that clears lines */
@@ -2240,12 +2240,12 @@ async function tRun(){const D=Math.min(2,devicePixelRatio||1),wh=()=>[tc.width,t
  await tTween(1000,k=>sun.root.scale.setScalar(Math.max(.001,tE.b(k))));
  await tWait(450);
  /* 4. close-up: surprise, blink, smile, wink */
- sun.ew=1.5;sun.eh=[1.7,1.7];sun.m=2.8;sunFace(sun);tBuzz(10);
- const fz=tFit(.34,.3);tShot(V3(0,.06,2.1+fz),V3(0,.06,2.1));
+ sun.ew=1.3;sun.eh=[1.45,1.45];sun.m=2.2;sunFace(sun);tBuzz(10);
+ const fz=tFit(.95,.85);tShot(V3(0,.06,2.1+fz),V3(0,.06,2.1));
  await tTween(1100,k=>{tCam.p.z=2.1+fz*(1-.12*tE.o(k))});
- await tTween(220,k=>{const b=1.7*(1-Math.sin(k*PI)*.95);sun.eh=[b,b];sunFace(sun)});
+ await tTween(220,k=>{const b=1.45*(1-Math.sin(k*PI)*.95);sun.eh=[b,b];sunFace(sun)});
  await tWait(200);
- await tTween(320,k=>{sun.m=2.8*(1-k);sun.ew=1.5-.5*k;sun.eh=[1.7-.7*k,1.7-.7*k];sunFace(sun)});sun.sm=true;sunFace(sun);
+ await tTween(320,k=>{sun.m=2.2*(1-k);sun.ew=1.3-.3*k;sun.eh=[1.45-.45*k,1.45-.45*k];sunFace(sun)});sun.sm=true;sunFace(sun);
  await tWait(420);
  tTween(520,k=>{sun.eh[1]=1-Math.sin(k*PI)*.95;sunFace(sun)});
  await tWait(260);
@@ -2261,8 +2261,7 @@ async function tRun(){const D=Math.min(2,devicePixelRatio||1),wh=()=>[tc.width,t
  await tWait(380);
  /* 6. the line becomes a line in the sand */
  const lx=tC/2;tPl.visible=true;let cur=tLine(lx,tC/2,lx,-tC/2);cur.scale.x=1;
- tCamApply();const fd=Math.max(2.4,tFit(.62,0)),fh=cam3.fov*PI/360,pt=Math.atan((.72-.3)/fd)-fh;
- tShot(V3(lx,.3,fd),V3(lx,.3+Math.tan(pt)*fd,0));tCamApply();
+ tShot(V3(lx,.95,1.35),V3(lx,0,-.2),0,null,52);tCamApply();const fd=1.6,fh=cam3.fov*PI/360;
  const pr=v=>{const q=v.clone().project(cam3),[w,h]=wh();return[(q.x+1)/2*w,(1-q.y)/2*h]},Pn=pr(V3(lx,.01,tC/2)),Pf=pr(V3(lx,.01,-tC/2)),lw1=Math.max(1.5*D,.055*tc.height/2/(fd*Math.tan(fh)));
  let mv=0,fo=1;
  tDraw=()=>{const[w,h]=wh(),ax=w*.2,ay=h*.8,te=Math.min(w-ax,ay),q=tE.io(mv),A=[ax+(Pn[0]-ax)*q,ay+(Pn[1]-ay)*q],B=[ax+te+(Pf[0]-ax-te)*q,ay-te+(Pf[1]-ay+te)*q];
@@ -2274,7 +2273,7 @@ async function tRun(){const D=Math.min(2,devicePixelRatio||1),wh=()=>[tc.width,t
  await tWalk(X1,lx-.38,0,1100,tE.o);
  await tWait(250);
  const wO=tWalk(O1,lx+.38,0,1100,tE.o);await tWait(350);
- tShot(V3(lx,1.3,tFit(1.35,1.05)),V3(lx,.5,0),1500);
+ tShot(V3(lx,1.3,tFit(1.35,1.05)),V3(lx,.5,0),1500,null,35);
  await wO;tEye(X1,1);tEye(O1,1);tBuzz(18);
  await tTween(300,k=>{X1.lean=O1.lean=.14*Math.sin(k*PI)});
  await tWait(700);
@@ -2332,18 +2331,18 @@ function tutStep(rn){const dt=Math.min(.05,Math.max(0,(rn-tLast)/1000));tLast=rn
  for(let i=0;i<tTw.length;i++){const w=tTw[i];if(w.g!==tutGen){tTw.splice(i--,1);continue}const k=Math.min(1,(tT-w.t0)/w.d);if(k<0)continue;w.f&&w.f(k);if(k>=1){tTw.splice(i--,1);w.r()}}
  tChStep(FDt);tSuns.forEach(s=>{s.wire.rotation.y+=dt*.35;s.wire.rotation.x+=dt*.2});
  tDyn.children.forEach(o=>{if(o.userData&&o.userData.p)o.scale.setScalar(1+.12*Math.sin(rn/140))});
- if(tTrack){const c=tTrack,P=V3(c.x,c.y+.4,c.z);tCam.t.lerp(P,1-Math.exp(-dt*7));tCam.p.lerp(P.clone().add(V3(2.4,1.1,2.6)),1-Math.exp(-dt*4))}
+ if(tTrack){const c=tTrack,P=V3(c.x,c.y+.4,c.z);tCam.t.lerp(P,1-Math.exp(-dt*7));tCam.p.lerp(P.clone().add(V3(.9,1.6,3.6)),1-Math.exp(-dt*4))}
  tCamApply();
  if(tCorner){const d=8,hh=d*Math.tan(cam3.fov*PI/360),hw=hh*cam3.aspect,R=Math.min(hw*.17,hh*.13),py=hh/((H||innerHeight)/2),sa=safeIn(),x=hw-R*1.85,y=hh-R*1.85-sa.t*py;
   tCorner.root.position.set(x,y,-d);tCorner.root.scale.setScalar(Math.max(.001,R/2.1*tCorner.pop));
   if(tb.style.display==='block'){const Wd=W||innerWidth,Hd=H||innerHeight,sx=Wd/2*(1+x/hw),sy=Hd/2*(1-y/hh),sr=R*1.3/py;tb.style.left=Math.max(8,sx-sr-16-tb.offsetWidth)+'px';tb.style.top=(sy-tb.offsetHeight/2)+'px'}}
- tSize();tx.clearRect(0,0,tc.width,tc.height);if(tDraw)tDraw();
+ tSize();if(tDraw){if(tc.style.visibility)tc.style.visibility='';tx.clearRect(0,0,tc.width,tc.height);tDraw()}else if(tc.style.visibility!=='hidden'){tx.clearRect(0,0,tc.width,tc.height);tc.style.visibility='hidden'}
  rend.render(scene3,cam3)}
-function tutStart(){if(tutOn)return;tutGen++;tTw.length=0;tT=0;tTs=1;tLast=performance.now();tutOn=true;tTrack=null;tTap=null;tDraw=null;tPl.visible=false;tCam.p.set(0,0,16);tCam.t.set(0,0,0);
+function tutStart(){if(tutOn)return;tutGen++;tTw.length=0;tT=0;tTs=1;tLast=performance.now();tutOn=true;tTrack=null;tTap=null;tDraw=null;tPl.visible=false;tCam.p.set(0,0,16);tCam.t.set(0,0,0);tCam.f=35;
  tut.className='on';document.body.classList.add('tut');tHush();tSize();tCamApply();tRun()}
 function tutEnd(){if(!tutOn)return;tutOn=false;tutGen++;tTw.length=0;tTap=null;tTrack=null;tDraw=null;tTs=1;tHush();
  tDyn.children.slice().forEach(o=>tDyn.remove(o));if(tCorner){cam3.remove(tCorner.root);tCorner=null}tSuns.length=0;tCh.length=0;tPl.visible=false;
- document.body.classList.remove('tut');tut.className='on fade';const st0=performance.now();
+ document.body.classList.remove('tut');tut.className='on fade';tc.style.visibility='';const st0=performance.now();
  const f=n=>{const k=(n-st0)/650,w=tc.width,h=tc.height;tx.clearRect(0,0,w,h);if(k>=1){tut.className='';return}tFill('#fff',1-k);requestAnimationFrame(f)};requestAnimationFrame(f)}
 ['pointerdown','pointermove','touchstart','touchmove','touchend','mousedown','mouseup','click','wheel'].forEach(ev=>tut.addEventListener(ev,e=>e.stopPropagation()));
 tut.addEventListener('pointerup',e=>{e.stopPropagation();if(e.target.id==='tuts')return;if(tTap){const f=tTap;tTap=null;f()}});
