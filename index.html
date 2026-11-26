@@ -86,14 +86,36 @@ html[data-theme="dark"] #c{filter:invert(1) hue-rotate(180deg)}
 #tuts{position:absolute;right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));font:900 14px system-ui,-apple-system,sans-serif;color:#000;background:#fff;border:3px solid #000;border-radius:12px;box-shadow:2px 2px 0 #000;padding:7px 12px}
 body.tut>*:not(#tut):not(#c){visibility:hidden!important}
 body.tut #c{filter:none!important}
+#cmr{position:fixed;inset:0;z-index:44;background:#fff;color:#000;display:none;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 10px) max(10px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(10px,env(safe-area-inset-left,0px))}
+#cmr.on{display:flex}
+#cmh{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-bottom:10px;border-bottom:4px solid #000}
+#cmh b{font:900 24px/1 system-ui,-apple-system,sans-serif;flex:1 0 100%}
+#cmr button{font:900 14px system-ui,-apple-system,sans-serif;color:#000;background:#fff;border:3px solid #000;border-radius:12px;box-shadow:3px 3px 0 #000;padding:7px 10px;touch-action:manipulation}
+#cmr button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
+#cmX{position:absolute;right:max(12px,env(safe-area-inset-right,0px));top:calc(env(safe-area-inset-top,0px) + 8px)}
+#cmS{background:#ffe600!important}
+#cmg{flex:1;overflow-y:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 2px 20px;align-content:start;-webkit-overflow-scrolling:touch}
+#cmg .cmt{position:relative;padding:0 0 177.78%!important;height:0;overflow:hidden;border-radius:12px!important}
+#cmg .cmt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+#cmg .tag{position:absolute;z-index:1;left:4px;bottom:5px;transform:rotate(-4deg);background:#ffe600;border:2px solid #000;border-radius:7px;padding:1px 5px;font:900 11px system-ui,-apple-system,sans-serif}
+#cmg .fav{position:absolute;right:5px;top:3px;font-size:18px;text-shadow:1px 1px 0 #fff}
+.cme{grid-column:1/-1;font:700 15px/1.35 system-ui,-apple-system,sans-serif;text-align:center;padding:30px 10px}
+#cmv{position:absolute;inset:0;z-index:5;background:#fff;display:none;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 10px) 10px calc(env(safe-area-inset-bottom,0px) + 10px)}
+#cmv.on{display:flex}
+#cmvm{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+#cmvm img,#cmvm video{max-width:100%;max-height:100%;border:4px solid #000;border-radius:14px;box-shadow:5px 5px 0 #000;background:#fff}
+#cmvb{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding-top:12px}
+#cmf{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:30;pointer-events:none;background:#fff;color:#000;border:3px solid #000;border-radius:12px;box-shadow:3px 3px 0 #000;padding:4px 10px;font:900 14px system-ui,-apple-system,sans-serif;opacity:0;transform:rotate(-3deg) scale(.6)}
+#cmf.on{animation:cmfa 1.6s ease-out}
+@keyframes cmfa{0%{opacity:0;transform:rotate(-3deg) scale(.6)}12%{opacity:1;transform:rotate(-3deg) scale(1.08)}20%{transform:rotate(-3deg) scale(1)}80%{opacity:1}100%{opacity:0}}
 </style></head><body>
 <div id="qro"><div id="qrb"><b>Scan to play!</b><canvas id="qrc"></canvas><small>Point a phone camera here and open the link. To keep it as an app, tap Share, then Add to Home Screen.</small><small style="margin-top:8px">Tap anywhere to close</small></div></div>
 <div id="nto"><div id="ntb"><button id="ntx">✕</button><h3>Play a friend</h3><div id="ntm"><button id="nth">Host a game</button><button id="ntj">Join a game</button></div><div id="nthv" style="display:none"><div class="code" id="ntcode"></div><canvas id="ntc"></canvas><small>Your friend scans this, or types the code under Join.</small></div><div id="ntjv" style="display:none"><input id="ntin" maxlength="4" autocomplete="off" autocapitalize="characters" placeholder="CODE"><br><button id="ntgo">Join</button></div><div id="nts"></div><button id="ntlv" style="display:none">Leave game</button></div></div>
 <div id="nchip"></div>
 <div id="cfb">✓</div>
-<div id="mnu"><div id="mnb"><h3>Menu</h3><button id="mnR">New game</button><button id="mnT">Tutorial</button><button id="mnD">Dark mode: off</button><button id="mnC">Colors</button><button id="mnF">Move confirm: off</button><button id="mnX">Close</button></div></div>
-<div id="cs"><div id="cst"></div><div id="csp"><div class="row"><button id="csO" class="on">O</button><button id="csX">X</button></div><div class="row"><button id="csP" class="on">Primary</button><button id="csS">Secondary</button></div><label>Hue</label><input type="range" id="csH" min="0" max="360"><label>Saturation</label><input type="range" id="csA" min="0" max="100"><label>Brightness</label><input type="range" id="csL" min="10" max="100"><button id="csd">Done</button></div></div>
-<div id="ver">ver.0.34</div>
+<div id="mnu"><div id="mnb"><h3>Menu</h3><button id="mnR">New game</button><button id="mnT">Tutorial</button><button id="mnD">Dark mode: off</button><button id="mnC">Colors</button><button id="mnP">Camera roll</button><button id="mnF">Move confirm: off</button><button id="mnX">Close</button></div></div>
+<div id="cmf"></div><div id="cmr"><div id="cmh"><b>Camera roll</b><button id="cmS">📸 Snap now</button><button id="cmA"></button><button id="cmV"></button><button id="cmZ"></button></div><button id="cmX">✕</button><div id="cmg"></div><div id="cmv"><div id="cmvm"></div><div id="cmvb"><button id="cmvP">‹</button><button id="cmvK">☆ Keep</button><button id="cmvH">Share</button><button id="cmvD">Save</button><button id="cmvR">Delete</button><button id="cmvN">›</button><button id="cmvX">✕</button></div></div></div><div id="cs"><div id="cst"></div><div id="csp"><div class="row"><button id="csO" class="on">O</button><button id="csX">X</button></div><div class="row"><button id="csP" class="on">Primary</button><button id="csS">Secondary</button></div><label>Hue</label><input type="range" id="csH" min="0" max="360"><label>Saturation</label><input type="range" id="csA" min="0" max="100"><label>Brightness</label><input type="range" id="csL" min="10" max="100"><button id="csd">Done</button></div></div>
+<div id="ver">ver.0.35</div>
 <header><div id="st"></div><div id="sw"></div><button id="rs" aria-label="Restart">↻</button><button id="mu" aria-label="Music" aria-pressed="true">♪</button></header>
 <canvas id="c"></canvas>
 <canvas id="pan" width="440" height="340"></canvas>
@@ -1409,7 +1431,7 @@ function drawQR(c,u){const q=new QRC(-1,1);q.addData(u);q.make();const n=q.getMo
 function showQR(){drawQR(document.getElementById('qrc'),location.href.split('#')[0].split('?')[0]);document.getElementById('qro').classList.add('on')}
 document.getElementById('qro').addEventListener('click',()=>document.getElementById('qro').classList.remove('on'));
 /* ---------- online play (2 phones, PeerJS) ---------- */
-const BUILD='0.34',net={on:false,me:0,conn:null,peer:null,q:[],start:false,inn:false};
+const BUILD='0.35',net={on:false,me:0,conn:null,peer:null,q:[],start:false,inn:false};
 const $n=i=>document.getElementById(i),nSt=t=>{$n('nts').textContent=t||''};
 const snap=()=>g.join('')+'|'+mvd+'|'+turn+'|'+pieces.length+'|'+lockT;
 const _pl=place,_df=doFlick,_dr=doRot,_rs=reset,_tc=toggleCpu,_pp=pickPiece;
@@ -2086,7 +2108,7 @@ function frame(now){if(intro===0)placeVer();netPump();requestAnimationFrame(fram
  if(mn)posMenu();
  stars.forEach(sp=>{const u=sp.userData,t=(now-u.t0)/1000,e=eob(Math.min(1,t/.5));sp.position.set(u.u*(fw/2)/camZ+Math.sin(now/1700+u.ph)*.12,u.v*(fh/2)/camZ+Math.cos(now/1300+u.ph)*.12,-60);sp.scale.setScalar(u.sz*e*(1+.12*Math.sin(now/400+u.ph))/camZ);sp.material.rotation=Math.sin(now/2000+u.ph)*.3;sp.material.color.set(TH[th].R)});
  for(let i=fx.length-1;i>=0;i--){const f=fx[i],k=(now-f.t0)/f.d;if(k>=1){f.kill();fx.splice(i,1)}else if(k>=0)f.upd(k)}
- if(csOn){csStep(now);rend.render(scene2,cam2)}else rend.render(scene,cam);
+ if(csOn){csStep(now);rend.render(scene2,cam2)}else{rend.render(scene,cam);cmStep(rn)}
  let s;if(!over)s=`<b>${turn?'X':'O'}’s turn</b><small>hold a panel, let go to place</small>`;
  else if(!fin)s=last;else s=`<b>${win?(g[win[0]]==1?'O':'X')+' wins!':'Draw'}</b><small>tap ↻ to play again</small>`;
  if(s!==last){last=s;st.innerHTML=s}}
@@ -2348,5 +2370,127 @@ function tutEnd(){if(!tutOn)return;tutOn=false;tutGen++;tTw.length=0;tTap=null;t
 tut.addEventListener('pointerup',e=>{e.stopPropagation();if(e.target.id==='tuts')return;if(tTap){const f=tTap;tTap=null;f()}});
 $n('tuts').onclick=e=>{e.stopPropagation();tutEnd()};
 $n('mnT').onclick=()=>{closeMn();tutStart()};
+/* ---------- cameraman: auto photos from its own angles + auto clips ----------
+   Spotter watches the same events the cinematic mode reacts to and gives each a hype score.
+   Photographer renders the scene from a second camera (never moves the player's view),
+   with no on-screen buttons, at 1080x1920 (Phone) or 2160x3840 (Poster).
+   Curator skips repeats (event + angle seen lately) and keeps the roll small.
+   Clips: the screen is recorded during each move and kept only if something big happened. */
+const CM={auto:true,clips:true,big:false};try{Object.assign(CM,JSON.parse(localStorage.getItem('ttt_cm')||'{}'))}catch(e){}
+const cmSave=()=>{try{localStorage.setItem('ttt_cm',JSON.stringify(CM))}catch(e){}};
+const cmCam=new THREE.OrthographicCamera(-1,1,1,-1,.1,100);
+const CMTAG={combo:'COMBO!',sun:'SUNBEAM',fall:'WHOOPS',shove:'SHOVE!',spin:'SPIN',pretty:'PRETTY',snap:'SNAP'};
+const CMHYPE={combo:6,sun:3,fall:3,shove:2,spin:1,act:0};
+const CMPLAN={combo:[1100,1900],sun:[1150,2050],fall:[380,950],shove:[260],spin:[520]};
+const CMV={combo:['hero','dutch','wide','close'],sun:['mouth','hero','dutch','top'],fall:['low','dutch','close','top'],shove:['close','dutch','low'],spin:['top','wide'],pretty:['diorama','low','top','wide'],snap:['hero','diorama','dutch','low','top']};
+let cmEvP='',cmQ=[],cmHist=[],cmWhim=performance.now()+40000,cmRec=null,cmRecMax=0,cmRecEv='',cmRecT0=0,cmQuiet=0,cmStream=null,cmThumb=null,cmUI=false,cmDB=null,cmList=[],cmCur=-1,cmURLs=[],cmDirty=false,cmLast={};
+
+/* storage */
+function cmOpen(){return cmDB?Promise.resolve(cmDB):new Promise((ok,no)=>{const r=indexedDB.open('ttt_cam',1);r.onupgradeneeded=()=>r.result.createObjectStore('shots',{keyPath:'id'});r.onsuccess=()=>{cmDB=r.result;ok(cmDB)};r.onerror=()=>no(r.error)})}
+function cmTx(mode,fn){return cmOpen().then(db=>new Promise((ok,no)=>{const t=db.transaction('shots',mode),out=fn(t.objectStore('shots'));t.oncomplete=()=>ok(out&&'result'in out?out.result:undefined);t.onerror=()=>no(t.error)}))}
+const cmAll=()=>cmTx('readonly',s=>s.getAll()).then(a=>(a||[]).sort((x,y)=>y.t-x.t)).catch(()=>[]);
+async function cmPut(rec){try{await cmTx('readwrite',s=>s.put(rec));const all=await cmAll(),del=[];
+ [['photo',48],['clip',12]].forEach(([k,cap])=>{const L=all.filter(r=>r.kind===k&&!r.fav);if(L.length>cap){L.sort((a,b)=>(a.hype-b.hype)||(a.t-b.t));del.push(...L.slice(0,L.length-cap))}});
+ if(del.length)await cmTx('readwrite',s=>{del.forEach(r=>s.delete(r.id))});cmFlash(rec)}catch(e){}}
+const cmId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+
+/* spotter */
+function cmEvNow(){const nowv=performance.now(),act=pieces.filter(p=>!p.sc&&((p.fly&&nowv>=p.fly.t0)||!p.done)),fo=act.find(p=>p.fly&&(p.fly.kind==='fall'||p.fly.kind==='eject')),sunOn=!!(sunRigs&&sunRigs.length),fallPs=scoreFallPs.filter(p=>pieces.includes(p));
+ if((sunOn||scoring)&&(fo||fallPs.length))return'combo';if(fo)return'fall';if(sunOn)return'sun';
+ if(act.some(p=>p.fly&&(p.fly.angry||p.fly.kind==='roll'||p.fly.kind==='shove')))return'shove';
+ if(act.some(p=>p.fly&&p.fly.kind==='ring'))return'spin';return act.length?'act':''}
+const cmHype=ev=>(CMHYPE[ev]||0)+(ev==='sun'||ev==='combo'?2*Math.max(0,((sunRigs&&sunRigs.length)||1)-1):0);
+
+function cmStep(rn){if(intro<2||tutOn)return;const ev=cmEvNow(),h=cmHype(ev),busy=!!ev||scoring;
+ if(ev!==cmEvP){cmEvP=ev;if(CM.auto&&!cmUI&&CMPLAN[ev]&&!cmQ.some(q=>q.ev===ev)&&(ev==='combo'||h>=5||rn-(cmLast[ev]||-1e9)>14000)){cmLast[ev]=rn;CMPLAN[ev].forEach(d=>cmQ.push({at:rn+d,ev,hype:h}))}}
+ if(CM.auto&&!cmUI&&!busy&&pieces.length>=4&&rn>cmWhim){cmWhim=rn+45000+Math.random()*30000;cmQ.push({at:rn,ev:'pretty',hype:2})}
+ /* clips */
+ if(busy)cmQuiet=rn;
+ if(busy&&!cmRec&&CM.clips&&!cmUI)cmRecStart(rn);
+ if(cmRec){if(h>cmRecMax){cmRecMax=h;cmRecEv=ev;cmGrabThumb()}
+  if(rn-cmQuiet>900||rn-cmRecT0>15000)cmRecStop(cmRecMax>=3)}
+ /* photos, one per frame */
+ const i=cmQ.findIndex(q=>rn>=q.at);if(i>=0){const q=cmQ.splice(i,1)[0];try{cmShoot(q)}catch(e){}}}
+
+/* photographer */
+function cmSubj(ev){const nowv=performance.now(),L=[];L.big=0;
+ if(ev==='sun'||ev==='combo'){(sunRigs||[]).forEach(r=>{L.push(r.root.position.clone());L.big=Math.max(L.big,3.1*r.root.scale.x)});pieces.filter(p=>p.sc).forEach(p=>L.push(p.grp.position.clone()))}
+ pieces.filter(p=>!p.sc&&((p.fly&&nowv>=p.fly.t0)||!p.done)).forEach(p=>L.push(p.grp.position.clone()));return L}
+function cmPick(ev){const L=CMV[ev]||CMV.snap,recent=cmHist.slice(-12),fresh=L.filter(v=>!recent.includes(ev+':'+v)),P=fresh.length?fresh:L;return P[Math.random()*P.length|0]}
+function cmFrame(ev,v){const L=ev==='pretty'?[]:cmSubj(ev),tg=new THREE.Vector3(0,ty0,0);let sp=2.2;
+ if(L.length){tg.set(0,0,0);L.forEach(x=>tg.add(x));tg.divideScalar(L.length);tg.y+=.6;sp=L.reduce((m,x)=>Math.max(m,x.distanceTo(tg)),0)+(L.big||0)*.7}
+ let a=az+(Math.random()<.5?-1:1)*(.5+Math.random()*.7),e=.4,z=Math.max(.8,Math.min(2.4,4.2/(sp+1.8))),roll=0;
+ if(v==='hero'){e=-.18;z*=1.05}
+ else if(v==='low'){e=-.32;z*=1.15}
+ else if(v==='close'){e=.3;z*=1.55}
+ else if(v==='dutch'){e=.12;z*=1.3;roll=(Math.random()<.5?-1:1)*(.16+Math.random()*.1)}
+ else if(v==='top'){e=.98;z*=1.1}
+ else if(v==='wide'){tg.lerp(new THREE.Vector3(0,ty0,0),.6);e=.42;z=1}
+ else if(v==='diorama'){tg.set(0,ty0,0);e=.5+Math.random()*.25;z=.95+Math.random()*.15}
+ else if(v==='mouth'&&sunRigs&&sunRigs.length){const r=sunRigs[0];tg.copy(r.mouth);a=Math.atan2(r.d.x,r.d.z);e=Math.max(-.5,Math.min(1.2,Math.asin(Math.max(-1,Math.min(1,r.d.y)))));z=.85}
+ return{tg,a,e,z,roll,ts:v==='diorama'||v==='wide'}}
+function cmRender(f,W0,H0){const hh=fh/2,hw=hh*W0/H0;cmCam.left=-hw;cmCam.right=hw;cmCam.top=hh;cmCam.bottom=-hh;cmCam.zoom=f.z;cmCam.updateProjectionMatrix();
+ cmCam.position.set(f.tg.x+Math.sin(f.a)*Math.cos(f.e)*40,f.tg.y+Math.sin(f.e)*40,f.tg.z+Math.cos(f.a)*Math.cos(f.e)*40);cmCam.up.set(0,1,0);cmCam.lookAt(f.tg);if(f.roll)cmCam.rotateZ(f.roll);cmCam.updateMatrixWorld();
+ /* clean plate: hide buttons, stars and the aim preview; aim the light, posts and paddles at this camera */
+ const hid=[],hide=o=>{if(o&&o.visible){o.visible=false;hid.push(o)}};btns.forEach(hide);stars.forEach(hide);ghosts.forEach(hide);
+ const dlp=dl.position.clone();dl.position.set(Math.sin(f.a-.46)*6.7,12,Math.cos(f.a-.46)*6.7);
+ const pv=posts.map(q=>q.visible);let bd=-9;posts.forEach(q=>{q.userData.d2=q.userData.c[0]*Math.sin(f.a)+q.userData.c[1]*Math.cos(f.a);bd=Math.max(bd,q.userData.d2)});posts.forEach(q=>q.visible=postsOn&&q.userData.d2<bd-.01);
+ const bq=PD.map(p=>p.bb.quaternion.clone());PD.forEach(p=>p.bb.quaternion.copy(cmCam.quaternion));
+ const pr=rend.getPixelRatio(),sz=rend.getSize(new THREE.Vector2()),c=document.createElement('canvas');c.width=W0;c.height=H0;
+ try{rend.setPixelRatio(1);rend.setSize(W0,H0,false);rend.render(scene,cmCam);c.getContext('2d').drawImage(cv,0,0,W0,H0)}
+ finally{rend.setPixelRatio(pr);rend.setSize(sz.x,sz.y,false);hid.forEach(o=>o.visible=true);dl.position.copy(dlp);posts.forEach((q,i)=>q.visible=pv[i]);PD.forEach((p,i)=>p.bb.quaternion.copy(bq[i]));rend.render(scene,cam)}
+ if(f.ts)cmTilt(c);return c}
+function cmTilt(c){const W=c.width,H=c.height,mk=(w,h)=>{const k=document.createElement('canvas');k.width=Math.max(1,w|0);k.height=Math.max(1,h|0);return k};
+ const s1=mk(W/4,H/4),s2=mk(W/16,H/16),b=mk(W,H),x1=s1.getContext('2d'),x2=s2.getContext('2d'),bx=b.getContext('2d');
+ x1.drawImage(c,0,0,s1.width,s1.height);x2.drawImage(s1,0,0,s2.width,s2.height);bx.imageSmoothingQuality='high';bx.drawImage(s2,0,0,W,H);
+ bx.globalCompositeOperation='destination-in';const g=bx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#000');g.addColorStop(.3,'rgba(0,0,0,0)');g.addColorStop(.64,'rgba(0,0,0,0)');g.addColorStop(1,'#000');bx.fillStyle=g;bx.fillRect(0,0,W,H);
+ c.getContext('2d').drawImage(b,0,0)}
+function cmShrink(c,w){const h=Math.round(c.height*w/c.width),k=document.createElement('canvas');k.width=w;k.height=h;k.getContext('2d').drawImage(c,0,0,w,h);return k}
+const cmBlob=(c,t,q)=>new Promise(ok=>c.toBlob(ok,t,q));
+function cmShoot(q){if(csOn||intro<2||document.hidden)return;const v=cmPick(q.ev),hk=q.ev+':'+v,score=q.hype+(cmHist.slice(-12).includes(hk)?0:2);
+ if(q.ev!=='snap'&&score<4)return;cmHist.push(hk);if(cmHist.length>40)cmHist.shift();
+ const W0=CM.big?2160:1080,H0=CM.big?3840:1920,c=cmRender(cmFrame(q.ev,v),W0,H0),th=cmShrink(c,270);
+ Promise.all([cmBlob(c,CM.big?'image/png':'image/jpeg',.92),cmBlob(th,'image/jpeg',.8)]).then(([blob,thumb])=>{if(blob)cmPut({id:cmId(),t:Date.now(),kind:'photo',ev:q.ev,v,hype:score,blob,thumb,w:W0,h:H0})})}
+
+/* clips */
+function cmMime(){if(!window.MediaRecorder||!cv.captureStream)return'';return['video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm'].find(m=>{try{return MediaRecorder.isTypeSupported(m)}catch(e){return false}})||''}
+function cmRecStart(rn){const mt=cmMime();if(!mt)return;try{cmStream=cmStream||cv.captureStream(30);const r=new MediaRecorder(cmStream,{mimeType:mt,videoBitsPerSecond:CM.big?16e6:8e6});r._ch=[];r._mt=mt;
+ r.ondataavailable=e=>{if(e.data&&e.data.size)r._ch.push(e.data)};r.start(500);cmRec=r;cmRecT0=rn;cmQuiet=rn;cmRecMax=0;cmRecEv='';cmThumb=null}catch(e){cmRec=null}}
+function cmGrabThumb(){const w=270,h=Math.round(cv.height*w/Math.max(1,cv.width)),k=document.createElement('canvas');k.width=w;k.height=h;try{k.getContext('2d').drawImage(cv,0,0,w,h);cmThumb=k}catch(e){}}
+function cmRecStop(keep){const r=cmRec,hype=cmRecMax,ev=cmRecEv,th=cmThumb,dur=performance.now()-cmRecT0;cmRec=null;if(!r)return;
+ r.onstop=()=>{if(!keep||!r._ch.length)return;const blob=new Blob(r._ch,{type:r._mt.split(';')[0]});(th?cmBlob(th,'image/jpeg',.8):Promise.resolve(null)).then(thumb=>cmPut({id:cmId(),t:Date.now(),kind:'clip',ev,v:'screen',hype,blob,thumb,dur:Math.round(dur/1000)}))};
+ try{r.stop()}catch(e){}}
+
+/* camera roll */
+function cmFlash(rec){const f=$n('cmf');f.textContent=(rec.kind==='clip'?'🎬 ':'📸 ')+(CMTAG[rec.ev]||'');f.classList.remove('on');void f.offsetWidth;f.classList.add('on')}
+function cmSync(){$n('cmA').textContent='Auto photos: '+(CM.auto?'on':'off');$n('cmV').textContent='Clips: '+(CM.clips?'on':'off');$n('cmZ').textContent='Size: '+(CM.big?'Poster 4K':'Phone')}
+function cmFree(){cmURLs.forEach(u=>URL.revokeObjectURL(u));cmURLs=[]}
+const cmURL=b=>{const u=URL.createObjectURL(b);cmURLs.push(u);return u};
+async function cmShow(){cmFree();cmList=await cmAll();const g=$n('cmg');g.innerHTML='';
+ if(!cmList.length){g.innerHTML='<p class="cme">Nothing yet. Play, or long-press the camera button for cinematic mode, and the cameraman will catch the big moments.</p>';return}
+ cmList.forEach((r,i)=>{const d=document.createElement('button');d.className='cmt';if(r.thumb){const im=new Image();im.src=cmURL(r.thumb);d.append(im)}
+  const t=document.createElement('span');t.className='tag';t.textContent=(r.kind==='clip'?'▶ ':'')+(CMTAG[r.ev]||r.ev)+(r.kind==='clip'&&r.dur?' '+r.dur+'s':'');d.append(t);
+  if(r.fav){const s=document.createElement('span');s.className='fav';s.textContent='★';d.append(s)}d.onclick=()=>cmView(i);g.append(d)})}
+function cmView(i){cmCur=(i+cmList.length)%cmList.length;const r=cmList[cmCur],m=$n('cmvm');m.innerHTML='';
+ if(r.kind==='clip'){const v=document.createElement('video');v.src=cmURL(r.blob);v.controls=v.loop=v.autoplay=v.muted=v.playsInline=true;v.setAttribute('playsinline','');m.append(v)}
+ else{const im=new Image();im.src=cmURL(r.blob);m.append(im)}
+ $n('cmvK').textContent=r.fav?'★ Kept':'☆ Keep';$n('cmv').classList.add('on')}
+function cmFile(r){const ty=r.blob.type||'',ext=ty.includes('png')?'png':ty.includes('mp4')?'mp4':ty.includes('webm')?'webm':'jpg';return new File([r.blob],'tic-tac-tower-'+(r.ev||'shot')+'-'+r.id+'.'+ext,{type:ty})}
+function cmDl(r){const f=cmFile(r),a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},3000)}
+async function cmShare(r){const f=cmFile(r);if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:'Tic Tac Tower'})}catch(e){}}else cmDl(r)}
+function cmOpenUI(){cmUI=true;cmQ.length=0;if(cmRec)cmRecStop(cmRecMax>=3);cmSync();$n('cmr').classList.add('on');cmShow()}
+function cmCloseUI(){cmUI=false;$n('cmv').classList.remove('on');$n('cmr').classList.remove('on');$n('cmvm').innerHTML='';cmFree()}
+$n('mnP').onclick=()=>{closeMn();cmOpenUI()};
+$n('cmX').onclick=cmCloseUI;
+$n('cmA').onclick=()=>{CM.auto=!CM.auto;cmSave();cmSync()};
+$n('cmV').onclick=()=>{CM.clips=!CM.clips;cmSave();cmSync()};
+$n('cmZ').onclick=()=>{CM.big=!CM.big;cmSave();cmSync()};
+$n('cmS').onclick=()=>{cmCloseUI();cmQ.push({at:performance.now()+120,ev:'snap',hype:2})};
+$n('cmvX').onclick=()=>{$n('cmv').classList.remove('on');$n('cmvm').innerHTML='';if(cmDirty){cmDirty=false;cmShow()}};
+$n('cmvP').onclick=()=>cmView(cmCur-1);$n('cmvN').onclick=()=>cmView(cmCur+1);
+$n('cmvH').onclick=()=>cmShare(cmList[cmCur]);$n('cmvD').onclick=()=>cmDl(cmList[cmCur]);
+$n('cmvK').onclick=async()=>{const r=cmList[cmCur];r.fav=!r.fav;await cmTx('readwrite',s=>s.put(r));$n('cmvK').textContent=r.fav?'★ Kept':'☆ Keep';cmDirty=true};
+$n('cmvR').onclick=async()=>{const r=cmList[cmCur];await cmTx('readwrite',s=>s.delete(r.id));$n('cmv').classList.remove('on');$n('cmvm').innerHTML='';await cmShow();if(cmList.length)cmView(Math.min(cmCur,cmList.length-1))};
+
 
 </script></body></html>
